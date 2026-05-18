@@ -6,17 +6,17 @@ A small local trading journal for logging trades, reviewing risk, and checking d
 
 ```text
 trade-tracker/
-├── app.py                 # Local web server and JSON API
-├── static/
-│   ├── index.html         # Browser UI
-│   ├── styles.css         # UI styling
-│   └── app.js             # Frontend behavior
-├── data/
-│   └── .gitkeep           # SQLite DB is created here locally
-├── tests/
-│   └── test_api.py        # API smoke tests
-├── requirements.txt       # Runtime dependencies
-└── README.md
+|-- app.py                 # Local web server and JSON API
+|-- static/
+|   |-- index.html         # Browser UI
+|   |-- styles.css         # UI styling
+|   `-- app.js             # Frontend behavior
+|-- data/
+|   `-- .gitkeep           # SQLite DB is created here locally
+|-- tests/
+|   `-- test_api.py        # API smoke tests
+|-- requirements.txt       # Runtime dependencies
+`-- README.md
 ```
 
 ## Run Locally
