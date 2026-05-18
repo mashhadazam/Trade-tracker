@@ -15,6 +15,8 @@ trade-tracker/
 |   `-- .gitkeep           # SQLite DB is created here locally
 |-- tests/
 |   `-- test_api.py        # API smoke tests
+|-- run-local.bat          # Start app with portable Python
+|-- test-local.bat         # Run tests with portable Python
 |-- requirements.txt       # Runtime dependencies
 `-- README.md
 ```
@@ -24,7 +26,7 @@ trade-tracker/
 From PowerShell in this folder:
 
 ```powershell
-python .\app.py
+.\run-local.bat
 ```
 
 Then open:
@@ -63,8 +65,10 @@ Invoke-RestMethod http://localhost:8000/api/dashboard
 ## Run Tests
 
 ```powershell
-python -m unittest discover -s tests
+.\test-local.bat
 ```
+
+The local helper scripts use the portable Python in `tools\python` if system Python is not installed.
 
 ## API Endpoints
 
