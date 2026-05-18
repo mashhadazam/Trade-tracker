@@ -28,7 +28,8 @@ def get_connection() -> sqlite3.Connection:
 
 
 def init_db() -> None:
-    with get_connection() as conn:
+    conn = get_connection()
+    try:
         conn.execute(
             """
             CREATE TABLE IF NOT EXISTS trades (
@@ -45,6 +46,9 @@ def init_db() -> None:
             )
             """
         )
+        conn.commit()
+    finally:
+        conn.close()
 
 
 def row_to_trade(row: sqlite3.Row) -> dict[str, Any]:
@@ -107,7 +111,8 @@ def validate_trade(payload: dict[str, Any]) -> dict[str, Any]:
 
 def create_trade(payload: dict[str, Any]) -> dict[str, Any]:
     trade = validate_trade(payload)
-    with get_connection() as conn:
+    conn = get_connection()
+    try:
         cursor = conn.execute(
             """
             INSERT INTO trades (
@@ -119,12 +124,18 @@ def create_trade(payload: dict[str, Any]) -> dict[str, Any]:
             trade,
         )
         row = conn.execute("SELECT * FROM trades WHERE id = ?", (cursor.lastrowid,)).fetchone()
+        conn.commit()
+    finally:
+        conn.close()
     return row_to_trade(row)
 
 
 def list_trades() -> list[dict[str, Any]]:
-    with get_connection() as conn:
+    conn = get_connection()
+    try:
         rows = conn.execute("SELECT * FROM trades ORDER BY created_at DESC, id DESC").fetchall()
+    finally:
+        conn.close()
     return [row_to_trade(row) for row in rows]
 
 
